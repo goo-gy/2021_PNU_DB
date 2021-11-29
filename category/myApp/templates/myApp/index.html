@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <title>Categories Database:</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <!-- <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css"> -->
+    <link href="{% static 'fontawesome_free/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -13,7 +17,7 @@
     <div class="container" style="padding: 0;">
         <div style="float: right; padding-right: 30px;">
             <form action="create">
-                <button>+</button>
+                <button type="submit" class="create"><i class="fas fa-user-plus"></i>Add User</button>
             </form>
         </div>
     </div>
@@ -54,16 +58,16 @@
                 <td>{{ student.address }}</td>
                 <td>
                     <form method="GET" action="edit">
-                        <button type="submit" name="id" value="{{student.id}}">EDIT</button>
+                        <button type="submit" name="id" value="{{student.id}}" class="edit"><i
+                                class="fas fa-pencil-alt"></i>Edit</button>
                     </form>
                     <form method="POST" action="delete">
                         {% csrf_token %}
-                        <button type="submit" name="id" value="{{student.id}}">DELETE</button>
+                        <button type="submit" name="id" value="{{student.id}}" class="delete"><i class="fas fa-trash-alt"></i>Delete</button>
                     </form>
                 </td>
             </tr>
             {% endfor %}
-            <h2>{{POST}}</h2>
         </tbody>
     </table>
 </body>

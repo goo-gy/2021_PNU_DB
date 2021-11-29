@@ -107,3 +107,31 @@
  .container td:nth-child(4),
  .container th:nth-child(4) { display: none; }
  }
+
+ button {
+   color: #FFFFFF;
+   border: none;
+   border-radius: 5%;
+   margin: 3px;
+   padding: 10px;
+ }
+
+ button i {
+   margin-right: 5px;
+ }
+
+ button.create {
+   background-color: #20af45;
+ }
+
+ button.edit {
+   background-color: #4DA3EA;
+ }
+
+ button.delete {
+   background-color: #c74653;
+ }
+
+ button:hover {
+   background-color: #777777;
+ }
