@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Categories Database:</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    <h1>Data</h1>
+    <div class="container" style="padding: 0;">
+        <div style="float: right; padding-right: 30px;">
+            <form action="create">
+                <button>+</button>
+            </form>
+        </div>
+    </div>
+    <table class="container">
+        <thead>
+            <tr>
+                <th>
+                    <h1>ID</h1>
+                </th>
+                <th>
+                    <h1>First name</h1>
+                </th>
+                <th>
+                    <h1>Last name</h1>
+                </th>
+                <th>
+                    <h1>Age</h1>
+                </th>
+                <th>
+                    <h1>Major</h1>
+                </th>
+                <th>
+                    <h1>Address</h1>
+                </th>
+                <th>
+                    <h1>Edit</h1>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.firstname }}</td>
+                <td>{{ student.secondname }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.major }}</td>
+                <td>{{ student.address }}</td>
+                <td>
+                    <form method="GET" action="edit">
+                        <button type="submit" name="id" value="{{student.id}}">EDIT</button>
+                    </form>
+                    <form method="POST" action="delete">
+                        {% csrf_token %}
+                        <button type="submit" name="id" value="{{student.id}}">DELETE</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            <h2>{{POST}}</h2>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,2 +1,3 @@
 # 2021_PNU_DB
-DB Assignment
+- Django
+- Mysql
