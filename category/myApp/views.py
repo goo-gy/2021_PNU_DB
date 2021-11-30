@@ -9,8 +9,17 @@ def home(request):
 
 def create(request):
     if(request.method == 'POST'):
+        duplicate = True
+        try:
+            studentId = request.POST['id']
+            student = Students.objects.get(id=studentId)
+        except:
+            duplicate = False
+        if(duplicate):
+            return render(request, 'myApp/create.html', {"error": {"msg":"중복된 id입니다."}})
         try:
             student = Students()
+            student.id = request.POST['id']
             student.firstname = request.POST['firstname']
             student.secondname = request.POST['secondname']
             student.age = request.POST['age']
@@ -20,7 +29,7 @@ def create(request):
             students = Students.objects.all()
             return render(request, 'myApp/index.html', {"students": students, "msg": "User가 등록되었습니다."})
         except:
-            return render(request, 'myApp/create.html', {"error": {"age":"잘못된 Age입니다."}})
+            return render(request, 'myApp/create.html', {"error": {"msg":"ID와 Age에는 숫자를 입력해주세요."}})
 
     if(request.method == 'GET'):
         return render(request, 'myApp/create.html',{})
@@ -40,7 +49,7 @@ def edit(request):
             return render(request, 'myApp/index.html', {"students": students, "msg": "정상적으로 수정되었습니다."})
         except:
             student = Students.objects.get(id=studentId)
-            return render(request, 'myApp/edit.html', {"student":student, "error": {"age":"잘못된 Age입니다."}})
+            return render(request, 'myApp/edit.html', {"student":student, "error": {"msg":"Age에는 숫자를 입력해주세요."}})
     if(request.method == 'GET'):
         try:
             studentId = request.GET['id']
@@ -55,7 +64,6 @@ def delete(request):
             studentId = request.POST['id']
             student = Students.objects.get(id=studentId)
             student.delete()
-            # return redirect('home')
             students = Students.objects.all()
             return render(request, 'myApp/index.html', {"students": students, "msg": "정상적으로 삭제되었습니다."})
         except:
