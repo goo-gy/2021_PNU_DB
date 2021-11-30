@@ -8,12 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
     <link rel="stylesheet" href="{% static 'css/create.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link href="{% static 'fontawesome_free/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+    {% if error %}
+    <div class="modal error">
+        <div>
+            <i class="fas fa-exclamation-triangle"></i><span>{{ error.age }}</span>
+        </div>
+    </div>
+    {% endif %}
     <div class="login-wrap">
         <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Add User</label>
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Add
+                User</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
             <div class="login-form">
                 <form method="POST">
@@ -40,7 +52,8 @@
                             <input id="pass" name="address" type="text" class="input">
                         </div>
                         <div class="group">
-                            <input type="submit" class="button" value="Register" style="margin-top: 40px; font-size: 15px">
+                            <input type="submit" class="button" value="Register"
+                                style="margin-top: 40px; font-size: 15px">
                         </div>
                         <div class="hr"></div>
                     </div>

@@ -7,12 +7,20 @@
     <title>Student Management System</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <!-- <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     <link href="{% static 'fontawesome_free/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesome_free/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesome_free/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+    {% if msg %}
+    <div class="modal msg">
+        <div >
+            <i class="fas fa-check-circle"></i><span>{{ msg }}</span>
+        </div>
+    </div>
+    {% endif %}
     <div style="padding: 40px;">
         <h1>Student Management System</h1>
     </div>
