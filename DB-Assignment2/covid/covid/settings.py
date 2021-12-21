@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-lzzt*s1q8+heqj!pl(o1nb*z973ba!rs8pm9_^4hqe%-ji=#gh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'covid.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'covid',
+        'USER': 'root',
+        'PASSWORD': 'qwe123',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
