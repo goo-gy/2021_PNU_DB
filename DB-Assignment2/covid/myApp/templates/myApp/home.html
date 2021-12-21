@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link href="{% static 'fontawesome_free/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome_free/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <title>2021 COVID</title>
+</head>
+
+<body>
+    {% if msg %}
+    <div class="modal msg">
+        <div >
+            <i class="fas fa-check-circle"></i><span>{{ msg }}</span>
+        </div>
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="modal error">
+        <div>
+            <i class="fas fa-exclamation-triangle"></i><span>{{ error.msg }}</span>
+        </div>
+    </div>
+    {% endif %}
+    <div class="header">
+        <div class="section">
+            <h1>2021 COVID</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <div class="section">
+                <div class="title">
+                    <h2>TABLE</h2>
+                </div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="title">
+                        <h3>Students</h3>
+                    </div>
+                    {% csrf_token %}
+                    <input type="file" name="Students">
+                    <input type="submit" />
+                </form>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="title">
+                        <h3>Professors</h3>
+                    </div>
+                    {% csrf_token %}
+                    <input type="file" name="Professors">
+                    <input type="submit" />
+                </form>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="title">
+                        <h3>Counties</h3>
+                    </div>
+                    {% csrf_token %}
+                    <input type="file" name="Counties">
+                    <input type="submit" />
+                </form>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="title">
+                        <h3>COVID</h3>
+                    </div>
+                    {% csrf_token %}
+                    <input type="file" name="COVID">
+                    <input type="submit" />
+                </form>
+            </div>
+        </div>
+        <div class="right">
+            <div class="section">
+                <div class="title">
+                    <h2>QUERY</h2>
+                </div>
+                <div class="title">
+                    <h3>Query1</h3>
+                </div>
+                <div class="title">
+                    <h3>Query2</h3>
+                </div>
+                <div class="title">
+                    <h3>Query3</h3>
+                </div>
+                <div class="title">
+                    <h3>Query4</h3>
+                </div>
+                <div class="title">
+                    <h3>Query5</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
