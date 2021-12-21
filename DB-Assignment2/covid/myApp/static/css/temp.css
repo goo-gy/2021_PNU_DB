@@ -1,0 +1,116 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+.wrapper {
+   position: relative;
+}
+
+.container {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color:#A7A1AE;
+  background-color:#1F2739;
+  text-align: left;
+  /* width: 80%; */
+  margin: 0 auto;
+
+  /* padding: 0 0 8em 0; */
+  /* display: table; */
+}
+
+
+.blue { color: #185875; }
+.yellow { color: #FFF842; }
+
+.container th h1 {
+   font-weight: bold;
+   font-size: 1em;
+   text-align: left;
+}
+
+.container td {
+   font-weight: normal;
+   font-size: 1em;
+   -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+   -moz-box-shadow: 0 2px 2px -2px #0E1119;
+   box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+
+.container td, .container th {
+   padding-bottom: 1rem;
+   padding-top: 1rem;
+   padding-left: 2rem;  
+   padding-right: 2rem;  
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+      background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+      background-color: #2C3446;
+}
+
+.container th {
+      background-color: #1F2739;
+}
+
+.container td:first-child { color: #FB667A; }
+
+.container tr:hover {
+ background-color: #464A52;
+ -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+ -moz-box-shadow: 0 6px 6px -6px #0E1119;
+ box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+ background-color: #EF7882;
+ color: #DDFEFE;
+ font-weight: bold;
+  
+ box-shadow: #c74653 -1px 1px, #c74653 -2px 2px, #c74653 -3px 3px, #c74653 -4px 4px, #c74653 -5px 5px, #c74653 -6px 6px;
+ transform: translate3d(6px, -6px, 0);
+  
+ transition-delay: 0s;
+ transition-duration: 0.4s;
+ transition-property: all;
+ transition-timing-function: line;
+}
+
+@media (max-width: 800px) {
+.container td:nth-child(4),
+.container th:nth-child(4) { display: none; }
+}
+
+button {
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5%;
+  margin: 3px;
+  padding: 10px;
+}
+
+button i {
+  margin-right: 5px;
+}
+
+button.create {
+  background-color: #20af45;
+}
+
+button.edit {
+  background-color: #4DA3EA;
+}
+
+button.delete {
+  background-color: #c74653;
+}
+
+button:hover {
+  background-color: #777777;
+}
