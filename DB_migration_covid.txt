@@ -1,0 +1,31 @@
+create database covid;
+use covid;
+
+CREATE TABLE Students(
+	studentID VARCHAR(30),
+	name VARCHAR(30),
+	score REAL,
+	county VARCHAR(30),
+	PRIMARY KEY(studentID)
+);
+
+CREATE TABLE Professors(
+	facultyID VARCHAR(30),
+	name VARCHAR(30),
+	age INT,
+	county VARCHAR(30),
+	PRIMARY KEY(facultyID)
+);
+
+CREATE TABLE Counties(
+	countyName VARCHAR(30),
+	population INT,
+	city VARCHAR(30),
+	PRIMARY KEY(countyName)
+);
+
+CREATE TABLE COVID(
+	patientID VARCHAR(30),
+	city VARCHAR(30),
+	PRIMARY KEY(patientID)
+);
