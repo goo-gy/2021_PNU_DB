@@ -8,31 +8,32 @@ body {
   text-align: center;
 }
 
-.content {   
+.content {
+  padding-top: 10px;
 }
 
 .content div.left {
   width: 50%;
-  height: 500px;
   float: left;
   box-sizing: border-box;
-  /* background: #8977ad; */
 }
 
 .content div.right {
+  display: block;
   width: 50%;
-  height: 500px;
   float: right;
   box-sizing: border-box;
-  /* background: #ece6cc; */
 }
 
 .section {
+  display: block;
+  height: auto;
   margin: 10px;
   padding: 30px;
   border-radius: 10px;
   background-color:#ffffff;
   color: black;
+  overflow: auto;
 }
 
 .header .section {
@@ -43,12 +44,85 @@ body {
 .content .section {
   background-color:#ffffff;
   color: black;
-  height: 500px;
+  height: auto;
+  min-height: 500px;
 }
 
 h1 {
   padding: 30px;
 }
 
-.section .title {
+.section .buttons {
+  display: block;
+  height: auto;
+  text-align: center;
+  align-items: center;
+}
+
+button {
+  float: left;
+  width: 160px;
+  height: 160px;
+
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5%;
+  margin: 10px 30px 10px 30px ;
+  padding: 10px;
+}
+
+button i {
+  margin-right: 5px;
+  font-size:x-large;
+}
+
+button.green {
+  background-color: #20af45;
+}
+
+button.blue {
+  background-color: #4DA3EA;
+}
+
+button.red {
+  background-color: #c74653;
+}
+
+button:hover {
+  background-color: #777777;
+}
+
+/* */
+
+label.button {
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5%;
+  margin: 3px;
+  padding: 10px;
+}
+
+label.button i {
+  margin-right: 5px;
+}
+
+label.button.green {
+  background-color: #20af45;
+}
+
+label.button.blue {
+  background-color: #4DA3EA;
+}
+
+label.button.red {
+  background-color: #c74653;
+}
+
+label.button:hover {
+  background-color: #777777;
+}
+
+input.v_file {
+  display: none;
+  /* visibility: hidden; */
 }

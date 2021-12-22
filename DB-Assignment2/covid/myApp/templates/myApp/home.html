@@ -45,37 +45,32 @@
                 <div class="title">
                     <h2>TABLE</h2>
                 </div>
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="" class="fileForm" method="POST" enctype="multipart/form-data">
                     <div class="title">
                         <h3>Students</h3>
                     </div>
                     {% csrf_token %}
-                    <input type="file" name="Students">
-                    <input type="submit" />
-                </form>
-                <form action="" method="POST" enctype="multipart/form-data">
+                    <label class="button green" for="fileStudents"><i class="fas fa-plus"></i>Add Students (CSV)</label>
+                    <input type="file" class="v_file" id="fileStudents" name="Students">
                     <div class="title">
                         <h3>Professors</h3>
                     </div>
                     {% csrf_token %}
-                    <input type="file" name="Professors">
-                    <input type="submit" />
-                </form>
-                <form action="" method="POST" enctype="multipart/form-data">
+                    <label class="button green" for="fileProfessors"><i class="fas fa-plus"></i>Add Professors
+                        (CSV)</label>
+                    <input type="file" class="v_file" id="fileProfessors" name="Professors">
                     <div class="title">
                         <h3>Counties</h3>
                     </div>
                     {% csrf_token %}
-                    <input type="file" name="Counties">
-                    <input type="submit" />
-                </form>
-                <form action="" method="POST" enctype="multipart/form-data">
+                    <label class="button green" for="fileCounties"><i class="fas fa-plus"></i>Add Counties (CSV)</label>
+                    <input type="file" class="v_file" id="fileCounties" name="Counties">
                     <div class="title">
                         <h3>COVID</h3>
                     </div>
                     {% csrf_token %}
-                    <input type="file" name="COVID">
-                    <input type="submit" />
+                    <label class="button green" for="fileCOVID"><i class="fas fa-plus"></i>Add COVID (CSV)</label>
+                    <input type="file" class="v_file" id="fileCOVID" name="COVID">
                 </form>
             </div>
         </div>
@@ -84,60 +79,47 @@
                 <div class="title">
                     <h2>QUERY</h2>
                 </div>
-                <form action="" method="GET" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="title">
-                        <h3>Query1</h3>
-                        <input name="queryNum" type="submit" value="query1"></input>
-                    </div>
-                    <div class="title">
-                        <h3>Query2</h3>
-                        <input name="queryNum" type="submit" value="query2"></input>
-                    </div>
-                    <div class="title">
-                        <h3>Query3</h3>
-                        <input name="queryNum" type="submit" value="query3"></input>
-                    </div>
-                    <div class="title">
-                        <h3>Query4</h3>
-                        <input name="queryNum" type="submit" value="query4"></input>
-                    </div>
-                    <div class="title">
-                        <h3>Query5</h3>
-                        <input name="queryNum" type="submit" value="query5"></input>
-                    </div>
-                    <!-- {% for row in data %}
-                        <tr>
-                            <div>
-                                {% for data in row %}
-                                <td>data</td>
-                                {% endfor %}
-                            </div>
-                        </tr>
-                        {% endfor %} -->
-                    {% if data %}
-                    <div id="modal-container">
-                        <table class="table-scroll small-first-col container">
-                            <thead>
-                                <tr>
-                                    <th>Result</th>
-                                </tr>
-                            </thead>
-                            <tbody class="body-half-screen">
-                                {% for row in data %}
-                                <tr>
-                                    {% for item in row %}
-                                    <td>{{ item }}</td>
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
-                </form>
+                <div class="buttons">
+                    <!-- <h3>Query1</h3> -->
+                    <button class="blue" name="queryNum" onclick="getQuery('query1')"><i
+                            class="fas fa-search"></i><h3>QUERY1</h3></button>
+                    <!-- <h3>Query2</h3> -->
+                    <button class="blue" name="queryNum" onclick="getQuery('query2')"><i
+                            class="fas fa-search"></i><h3>QUERY2</h3></button>
+                    <!-- <h3>Query3</h3> -->
+                    <button class="blue" name="queryNum" onclick="getQuery('query3')"><i
+                            class="fas fa-search"></i><h3>QUERY3</h3></button>
+                    <!-- <h3>Query4</h3> -->
+                    <button class="blue" name="queryNum" onclick="getQuery('query4')"><i
+                            class="fas fa-search"></i><h3>QUERY4</h3></button>
+                    <!-- <h3>Query5</h3> -->
+                    <button class="blue" name="queryNum" onclick="getQuery('query5')"><i
+                            class="fas fa-search"></i><h3>QUERY5</h3></button>
+                </div>
             </div>
         </div>
+        {% if data %}
     </div>
+    <div id="modal-container">
+        <table class="table-scroll small-first-col container">
+            <thead>
+                <tr>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody class="body-half-screen">
+                {% for row in data %}
+                <tr>
+                    {% for item in row %}
+                    <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <!-- TODO : local jquery 사용하기 -->
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         window.onload = function () {
@@ -150,6 +132,26 @@
             $(this).addClass('out');
             $('body').removeClass('modal-active');
         });
+
+        $(".fileForm").change(function (e) {
+            const form = $(".fileForm");
+            form.submit();
+        });
+
+
+        function getQuery(queryNum) {
+            const form = document.createElement('form');
+            form.setAttribute('method', 'get');
+            form.setAttribute('action', '')
+            field = document.createElement('input');
+            field.setAttribute('type', 'hidden');
+            field.setAttribute('name', 'queryNum');
+            field.setAttribute('value', queryNum);
+            form.append(field);
+
+            document.body.append(form);
+            form.submit();
+        }
     </script>
 </body>
 

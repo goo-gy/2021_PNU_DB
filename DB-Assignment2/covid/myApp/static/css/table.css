@@ -3,7 +3,7 @@
     background-color: #1f273980;
     width: 100%;
     height: 100%;
-    color:#A7A1AE;
+    color:#4DA3EA;
   }
   
   .table-scroll{
@@ -19,6 +19,7 @@
     position:relative;
     display: block;
     width:100%;
+    color:#FB667A;
   }
   
   .table-scroll tbody{
