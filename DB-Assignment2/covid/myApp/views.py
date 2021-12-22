@@ -1,7 +1,9 @@
-from django.shortcuts import render, resolve_url
+from django.shortcuts import render
 from django.db import connection
+import django
+import time
 
-# sqlQuery = "SELECT studentID, name, score, county FROM Students;"
+DB_DUP = 1062
 
 dict_header = {
     "query1": ["County", "AVG(Score)"],
@@ -34,6 +36,16 @@ ON county=countyName;
 """,
 }
 
+updateViewSQL = """
+DROP TABLE IF EXISTS QUERY5;
+CREATE TABLE QUERY5(
+	studentName VARCHAR(30),
+	city VARCHAR(30),
+	PRIMARY KEY(studentName, City)
+);
+INSERT INTO QUERY5 (studentName, city) %s;
+""" %(dict_query["query5"])
+
 def saveWithCSV(table, file):
     content = file.read().decode('utf8')
     csvData = content.split('\n')
@@ -41,19 +53,34 @@ def saveWithCSV(table, file):
         insertSQL = "INSERT INTO %s VALUES" %(table)
         li_strTuple = []
         for row in csvData:
-            # TODO: Error Handling (get table info & compare with data)
             tuple = row.strip().split(',')
             strTuple = " ('" + "','".join(tuple) + "')"
             li_strTuple.append(strTuple)
         insertSQL += ",".join(li_strTuple) + ';'
         cursor.execute(insertSQL)
+    updateView()
+
+def updateView():
+    print(updateViewSQL)
+    with connection.cursor() as cursor:
+        cursor.execute(updateViewSQL)
 
 def getData(queryNum):
     with connection.cursor() as cursor:
-        cursor.execute(dict_query[queryNum])
-        result = cursor.fetchall()
-        # print(result)
+        if(queryNum == "query5"):
+            query5SQL = "SELECT * FROM QUERY5"
+            # TODO : CHECK TIME START
+            cursor.execute(query5SQL)
+            result = cursor.fetchall()
+            # TODO : CHECK TIME END
+        else:
+            cursor.execute(dict_query[queryNum])
+            result = cursor.fetchall()
     return result
+
+def getErrorNum(err):
+    errNumStr = str(err).split(',')[0].split('(')[1]
+    return int(errNumStr)
 
 def home(request):
     if(request.method == 'GET'):
@@ -61,9 +88,14 @@ def home(request):
             queryNum = request.GET['queryNum']
             if(queryNum in dict_query.keys()):
                 result = getData(queryNum)
-                return render(request, 'myApp/home.html', {"data": result, "header": dict_header[queryNum]},)
-        except:
+                objError = {}
+                if(len(result) == 0 ):
+                    objError["msg"] = "적절한 데이터가 없습니다."
+                return render(request, 'myApp/home.html', {"data": result, "header": dict_header[queryNum], "error": objError},)
+        except django.utils.datastructures.MultiValueDictKeyError as paramError:
             return render(request, 'myApp/home.html')
+        except:
+            return render(request, 'myApp/home.html', {"error": {"msg": "적절한 데이터가 없습니다."}})
     elif(request.method == 'POST'):
         if(len(request.FILES)):
             li_name = ['Students', 'Professors', 'Counties', 'COVID']
@@ -71,11 +103,18 @@ def home(request):
                 try:
                     file = request.FILES[name]
                 except:
-                    print("pass", name)
                     continue
+                #-----------------------------
                 try:
                     saveWithCSV(name, file)
                     return render(request, 'myApp/home.html', {"msg" : "%s가 등록되었습니다." %name})
+                except django.db.utils.IntegrityError as err:
+                    errorNum = getErrorNum(err)
+                    if(errorNum == DB_DUP):
+                        return render(request, 'myApp/home.html', {"error": {"msg" : "중복된 데이터가 있습니다."}})
+                    return render(request, 'myApp/home.html', {"error": {"msg" : "잘못된 형식입니다!"}})
+                except django.db.utils.OperationalError as err:
+                    return render(request, 'myApp/home.html', {"error": {"msg" : "잘못된 형식입니다."}})
                 except:
-                    return render(request, 'myApp/home.html', {"error": {"msg" : "등록에 실패하였습니다.(중복/형식)"}})
+                    return render(request, 'myApp/home.html', {"error": {"msg" : "잘못된 형식입니다!"}})
         return render(request, 'myApp/home.html', {"error" : {"msg":"파일을 업로드하여 주십시오."}})
