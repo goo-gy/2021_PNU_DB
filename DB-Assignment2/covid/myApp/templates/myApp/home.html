@@ -46,31 +46,30 @@
                     <h2>TABLE</h2>
                 </div>
                 <form action="" class="fileForm" method="POST" enctype="multipart/form-data">
-                    <div class="title">
+                    {% csrf_token %}
+                    <div class="item">
                         <h3>Students</h3>
+                        <label class="button green" for="fileStudents"><i class="fas fa-plus"></i>Add Students
+                            (CSV)</label>
+                        <input type="file" class="v_file" id="fileStudents" name="Students">
                     </div>
-                    {% csrf_token %}
-                    <label class="button green" for="fileStudents"><i class="fas fa-plus"></i>Add Students (CSV)</label>
-                    <input type="file" class="v_file" id="fileStudents" name="Students">
-                    <div class="title">
+                    <div class="item">
                         <h3>Professors</h3>
+                        <label class="button green" for="fileProfessors"><i class="fas fa-plus"></i>Add Professors
+                            (CSV)</label>
+                        <input type="file" class="v_file" id="fileProfessors" name="Professors">
                     </div>
-                    {% csrf_token %}
-                    <label class="button green" for="fileProfessors"><i class="fas fa-plus"></i>Add Professors
-                        (CSV)</label>
-                    <input type="file" class="v_file" id="fileProfessors" name="Professors">
-                    <div class="title">
+                    <div class="item">
                         <h3>Counties</h3>
+                        <label class="button green" for="fileCounties"><i class="fas fa-plus"></i>Add Counties
+                            (CSV)</label>
+                        <input type="file" class="v_file" id="fileCounties" name="Counties">
                     </div>
-                    {% csrf_token %}
-                    <label class="button green" for="fileCounties"><i class="fas fa-plus"></i>Add Counties (CSV)</label>
-                    <input type="file" class="v_file" id="fileCounties" name="Counties">
-                    <div class="title">
+                    <div class="item">
                         <h3>COVID</h3>
+                        <label class="button green" for="fileCOVID"><i class="fas fa-plus"></i>Add COVID (CSV)</label>
+                        <input type="file" class="v_file" id="fileCOVID" name="COVID">
                     </div>
-                    {% csrf_token %}
-                    <label class="button green" for="fileCOVID"><i class="fas fa-plus"></i>Add COVID (CSV)</label>
-                    <input type="file" class="v_file" id="fileCOVID" name="COVID">
                 </form>
             </div>
         </div>
@@ -110,11 +109,11 @@
             <thead>
                 <tr>
                     {% if header %}
-                        {% for item in header %}
-                            <th>{{ item }}</th>
-                        {% endfor %}
+                    {% for item in header %}
+                    <th>{{ item }}</th>
+                    {% endfor %}
                     {% else %}
-                        <th>Result</th>
+                    <th>Result</th>
                     {% endif %}
                 </tr>
             </thead>

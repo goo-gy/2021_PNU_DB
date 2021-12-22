@@ -59,6 +59,10 @@ h1 {
   align-items: center;
 }
 
+div.item {
+  padding-bottom: 15px;
+}
+
 button {
   float: left;
   width: 160px;
