@@ -3,6 +3,14 @@ from django.db import connection
 
 # sqlQuery = "SELECT studentID, name, score, county FROM Students;"
 
+dict_header = {
+    "query1": ["County", "AVG(Score)"],
+    "query2": ["City", "AVG(Score)"],
+    "query3": ["Professor", "Student"],
+    "query4": ["Professor", "Student"],
+    "query5": ["Student", "City"], 
+}
+
 dict_query = {
     "query1":"SELECT county, AVG(score) FROM students GROUP BY county ORDER BY county;",
     "query2":"SELECT city, AVG(score) FROM (SELECT studentID, score, city FROM students JOIN counties ON students.county = counties.countyName ) AS studentCounty GROUP BY city ORDER BY city;",
@@ -44,7 +52,7 @@ def getData(queryNum):
     with connection.cursor() as cursor:
         cursor.execute(dict_query[queryNum])
         result = cursor.fetchall()
-        print(result)
+        # print(result)
     return result
 
 def home(request):
@@ -53,7 +61,7 @@ def home(request):
             queryNum = request.GET['queryNum']
             if(queryNum in dict_query.keys()):
                 result = getData(queryNum)
-                return render(request, 'myApp/home.html', {"data": result})
+                return render(request, 'myApp/home.html', {"data": result, "header": dict_header[queryNum]},)
         except:
             return render(request, 'myApp/home.html')
     elif(request.method == 'POST'):

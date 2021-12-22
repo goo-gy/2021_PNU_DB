@@ -81,20 +81,25 @@
                 </div>
                 <div class="buttons">
                     <!-- <h3>Query1</h3> -->
-                    <button class="blue" name="queryNum" onclick="getQuery('query1')"><i
-                            class="fas fa-search"></i><h3>QUERY1</h3></button>
+                    <button class="blue" name="queryNum" onclick="getQuery('query1')"><i class="fas fa-search"></i>
+                        <h3>QUERY1</h3>
+                    </button>
                     <!-- <h3>Query2</h3> -->
-                    <button class="blue" name="queryNum" onclick="getQuery('query2')"><i
-                            class="fas fa-search"></i><h3>QUERY2</h3></button>
+                    <button class="blue" name="queryNum" onclick="getQuery('query2')"><i class="fas fa-search"></i>
+                        <h3>QUERY2</h3>
+                    </button>
                     <!-- <h3>Query3</h3> -->
-                    <button class="blue" name="queryNum" onclick="getQuery('query3')"><i
-                            class="fas fa-search"></i><h3>QUERY3</h3></button>
+                    <button class="blue" name="queryNum" onclick="getQuery('query3')"><i class="fas fa-search"></i>
+                        <h3>QUERY3</h3>
+                    </button>
                     <!-- <h3>Query4</h3> -->
-                    <button class="blue" name="queryNum" onclick="getQuery('query4')"><i
-                            class="fas fa-search"></i><h3>QUERY4</h3></button>
+                    <button class="blue" name="queryNum" onclick="getQuery('query4')"><i class="fas fa-search"></i>
+                        <h3>QUERY4</h3>
+                    </button>
                     <!-- <h3>Query5</h3> -->
-                    <button class="blue" name="queryNum" onclick="getQuery('query5')"><i
-                            class="fas fa-search"></i><h3>QUERY5</h3></button>
+                    <button class="blue" name="queryNum" onclick="getQuery('query5')"><i class="fas fa-search"></i>
+                        <h3>QUERY5</h3>
+                    </button>
                 </div>
             </div>
         </div>
@@ -104,7 +109,13 @@
         <table class="table-scroll small-first-col container">
             <thead>
                 <tr>
-                    <th>Result</th>
+                    {% if header %}
+                        {% for item in header %}
+                            <th>{{ item }}</th>
+                        {% endfor %}
+                    {% else %}
+                        <th>Result</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody class="body-half-screen">
